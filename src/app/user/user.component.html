@@ -1,0 +1,21 @@
+<div *ngFor="let user of users | sortByName:'name'" [ngClass]="{ online: user.isRead }" class="wrapper">
+  
+  <div class="card-container">
+    <div class="picture">
+      <img src="{{ user.url }}" alt="">
+      <div *ngIf="user.isShowDetails; else short_details">
+        <p>Offline</p>
+      </div>
+      <ng-template #short_details>
+        <p>Online</p>
+      </ng-template>
+    </div>
+    <div class="user-data">
+      <h2>{{ user.name }}</h2>
+      <div class="post-text">{{ user.status }}</div>
+    </div>
+    <button class="network" (click)="user.isShowDetails = !user.isShowDetails" (click)="user.isRead = !user.isRead">
+      {{ user.isShowDetails ? "Online" : "Offline" }}
+    </button>
+  </div>
+</div>
